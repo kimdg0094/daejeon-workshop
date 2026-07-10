@@ -189,6 +189,20 @@
   .leaflet-container{font:inherit}
   .leaflet-popup-content{font:inherit;font-size:.85rem}
   .leaflet-popup-content b{font-weight:800}
+  /* zone markers + legend */
+  .legend .zc{width:11px;height:11px;border-radius:50%;display:inline-block;border:2px solid #fff;box-shadow:0 0 0 1px var(--border-strong)}
+  .legend .lg-sh b{color:var(--ink);font-size:1.05em;line-height:1}
+  .mkwrap{display:flex;align-items:center;justify-content:center;background:none;border:0}
+  .mk{border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.35),0 1px 3px rgba(0,0,0,.4);box-sizing:border-box}
+  .mk.s{width:13px;height:13px;border-radius:50%}
+  .mk.v{width:15px;height:15px;border-radius:3px;transform:rotate(45deg)}
+  .mk.sel{box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--ink),0 1px 4px rgba(0,0,0,.5)}
+  .locbtn .pin.dia{width:10px;height:10px;border-radius:3px;transform:rotate(45deg)}
+  .locbtn.vrow{background:var(--surface)}
+  .locbtn.vrow .nm{font-weight:800}
+  .selinfo .pnote{font-size:.72rem;color:var(--ink-faint);margin:-3px 0 8px}
+  .selinfo li.mine{color:var(--accent-deep);font-weight:700}
+  .selinfo li.mine .km{color:var(--accent-deep)}
 </style>
 
 <header class="hero">
@@ -218,7 +232,13 @@
       <div class="maplayout">
         <div id="map"></div>
         <div class="mappanel">
-          <div class="legend"><span><i style="background:var(--accent)"></i>계곡 7곳</span><span><i style="background:var(--sand)"></i>숙소 9곳</span></div>
+          <div class="legend">
+            <span class="lg-sh"><b>◆</b>&nbsp;계곡 &nbsp; <b>●</b>&nbsp;숙소</span>
+            <span><i class="zc" style="background:#0e7c72"></i>대둔산·수락권</span>
+            <span><i class="zc" style="background:#3b6fd4"></i>장태산권</span>
+            <span><i class="zc" style="background:#8b5cf6"></i>동학사권</span>
+            <span><i class="zc" style="background:#8aa0a8"></i>단독 계곡</span>
+          </div>
           <div class="loclist" id="loclist"></div>
           <div class="selinfo" id="selinfo"></div>
           <button class="mreset" id="mreset" type="button">전체 보기 / 선택 해제</button>
@@ -561,38 +581,58 @@
   var box=document.getElementById('loclist');
   if(!window.L||!box){ if(box){box.innerHTML='<p style="font-size:.85rem;color:var(--ink-faint)">지도를 불러오지 못했습니다. 네트워크 확인 후 새로고침해 주세요.</p>';} return; }
 
+  // z = 권역: daedun / jangtae / donghak / solo(근처 숙소 없는 단독 계곡)
   var LOC=[
-    {n:"수통골 계곡",t:"valley",lat:36.329,lng:127.301,m:"무료·도심20분"},
-    {n:"상소동 산림욕장",t:"valley",lat:36.239,lng:127.492,m:"무료·물놀이장"},
-    {n:"동학사 계곡",t:"valley",lat:36.341,lng:127.210,m:"7~8월·발만"},
-    {n:"대둔산 수락계곡",t:"valley",lat:36.147,lng:127.319,m:"무료·폭포15m"},
-    {n:"장태산 자연휴양림",t:"valley",lat:36.222,lng:127.301,m:"입장료·숲"},
-    {n:"장령산 계곡",t:"valley",lat:36.246,lng:127.531,m:"무료·한적"},
-    {n:"청강수폭포 계곡",t:"valley",lat:36.164,lng:127.397,m:"가든·먹거리"},
-    {n:"대둔산 잉스힐펜션",t:"stay",lat:36.145,lng:127.320,m:"15만·★9.8"},
-    {n:"논산 패밀리아펜션",t:"stay",lat:36.158,lng:127.325,m:"15.8만·★9.8"},
-    {n:"대둔산빌리지 워터파크",t:"stay",lat:36.150,lng:127.314,m:"8만~·수영장"},
-    {n:"대둔산 쉼마루펜션",t:"stay",lat:36.152,lng:127.323,m:"18만·★9.7"},
-    {n:"대둔산 사계절펜션",t:"stay",lat:36.135,lng:127.345,m:"문의·★8.4"},
-    {n:"대둔산아리아펜션",t:"stay",lat:36.149,lng:127.322,m:"통나무·대형"},
-    {n:"장태산 숲속의집",t:"stay",lat:36.220,lng:127.303,m:"7.5만·가성비"},
-    {n:"숲속의작은집",t:"stay",lat:36.216,lng:127.299,m:"28~35만·독채"},
-    {n:"계룡산동학사펜션",t:"stay",lat:36.335,lng:127.230,m:"27~28만·6~12인"}
+    {n:"수통골 계곡",t:"valley",z:"solo",lat:36.329,lng:127.301,m:"무료·도심20분"},
+    {n:"상소동 산림욕장",t:"valley",z:"solo",lat:36.239,lng:127.492,m:"무료·물놀이장"},
+    {n:"동학사 계곡",t:"valley",z:"donghak",lat:36.341,lng:127.210,m:"7~8월·발만"},
+    {n:"대둔산 수락계곡",t:"valley",z:"daedun",lat:36.147,lng:127.319,m:"무료·폭포15m"},
+    {n:"장태산 자연휴양림",t:"valley",z:"jangtae",lat:36.222,lng:127.301,m:"입장료·숲"},
+    {n:"장령산 계곡",t:"valley",z:"solo",lat:36.246,lng:127.531,m:"무료·한적"},
+    {n:"청강수폭포 계곡",t:"valley",z:"solo",lat:36.164,lng:127.397,m:"가든·먹거리"},
+    {n:"대둔산 잉스힐펜션",t:"stay",z:"daedun",lat:36.145,lng:127.320,m:"15만·★9.8"},
+    {n:"논산 패밀리아펜션",t:"stay",z:"daedun",lat:36.158,lng:127.325,m:"15.8만·★9.8"},
+    {n:"대둔산빌리지 워터파크",t:"stay",z:"daedun",lat:36.150,lng:127.314,m:"8만~·수영장"},
+    {n:"대둔산 쉼마루펜션",t:"stay",z:"daedun",lat:36.152,lng:127.323,m:"18만·★9.7"},
+    {n:"대둔산 사계절펜션",t:"stay",z:"daedun",lat:36.135,lng:127.345,m:"문의·★8.4"},
+    {n:"대둔산아리아펜션",t:"stay",z:"daedun",lat:36.149,lng:127.322,m:"통나무·대형"},
+    {n:"장태산 숲속의집",t:"stay",z:"jangtae",lat:36.220,lng:127.303,m:"7.5만·가성비"},
+    {n:"숲속의작은집",t:"stay",z:"jangtae",lat:36.216,lng:127.299,m:"28~35만·독채"},
+    {n:"계룡산동학사펜션",t:"stay",z:"donghak",lat:36.335,lng:127.230,m:"27~28만·6~12인"}
   ];
+  var ZC={daedun:'#0e7c72',jangtae:'#3b6fd4',donghak:'#8b5cf6',solo:'#8aa0a8'};
   function cvar(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
-  var COL={valley:cvar('--accent')||'#0d7d72',stay:cvar('--sand')||'#a86a2c'};
 
-  var map=L.map('map',{scrollWheelZoom:false}).setView([36.25,127.37],10);
+  // 권역 대표 계곡 index
+  var zoneValley={};
+  LOC.forEach(function(p,i){ if(p.t==='valley' && p.z!=='solo' && zoneValley[p.z]==null) zoneValley[p.z]=i; });
+
+  var map=L.map('map',{scrollWheelZoom:false,doubleClickZoom:false,boxZoom:false}).setView([36.25,127.37],10);
   function tileURL(){var d=matchMedia('(prefers-color-scheme: dark)').matches;
     return 'https://{s}.basemaps.cartocdn.com/'+(d?'dark_all':'light_all')+'/{z}/{x}/{y}{r}.png';}
   var tiles=L.tileLayer(tileURL(),{subdomains:'abcd',maxZoom:19,attribution:'&copy; OpenStreetMap &copy; CARTO'}).addTo(map);
 
-  var lineLayer=L.layerGroup().addTo(map);
+  function icon(z,shape,sel){
+    return L.divIcon({className:'mkwrap',iconSize:[26,26],iconAnchor:[13,13],
+      html:'<span class="mk '+shape+(sel?' sel':'')+'" style="background:'+ZC[z]+'"></span>'});
+  }
+  function shapeOf(p){return p.t==='valley'?'v':'s';}
+
+  // 항상 표시되는 권역 연결선 (숙소 → 소속 계곡)
+  var connectors=[];
+  LOC.forEach(function(p){
+    if(p.t==='stay' && zoneValley[p.z]!=null){
+      var v=LOC[zoneValley[p.z]];
+      var ln=L.polyline([[v.lat,v.lng],[p.lat,p.lng]],{color:ZC[p.z],weight:1.5,opacity:.5,dashArray:'4,5'}).addTo(map);
+      connectors.push({line:ln,zone:p.z});
+    }
+  });
+
+  var emphLayer=L.layerGroup().addTo(map);
   var markers=[], allPts=[], selected=-1;
-  function baseStyle(t){return {radius:7,color:'#ffffff',weight:2,fillColor:COL[t],fillOpacity:1};}
   LOC.forEach(function(p,i){
-    var mk=L.circleMarker([p.lat,p.lng],baseStyle(p.t)).addTo(map);
-    mk.bindTooltip(p.n,{direction:'top',offset:[0,-5]});
+    var mk=L.marker([p.lat,p.lng],{icon:icon(p.z,shapeOf(p),false)}).addTo(map);
+    mk.bindTooltip(p.n,{direction:'top',offset:[0,-9]});
     mk.on('click',function(){select(i);});
     markers.push(mk); allPts.push([p.lat,p.lng]);
   });
@@ -603,44 +643,59 @@
     h=Math.sin(dLa/2)*Math.sin(dLa/2)+Math.cos(a.lat*rad)*Math.cos(b.lat*rad)*Math.sin(dLo/2)*Math.sin(dLo/2);
     return 2*R*Math.asin(Math.sqrt(h));}
 
-  function resetMarkers(){markers.forEach(function(mk,j){mk.setStyle(baseStyle(LOC[j].t));});}
+  function clearFocus(){
+    markers.forEach(function(mk,j){ mk.setIcon(icon(LOC[j].z,shapeOf(LOC[j]),false)); mk.setOpacity(1); });
+    connectors.forEach(function(c){ c.line.setStyle({opacity:.5,weight:1.5}); });
+    emphLayer.clearLayers();
+  }
 
-  function select(i){
+  function select(i){   // 뷰(확대/이동)는 절대 변경하지 않음 — 강조만
     selected=i; var p=LOC[i], opp=(p.t==='valley')?'stay':'valley';
-    resetMarkers();
-    markers[i].setStyle({radius:11,weight:3,color:cvar('--ink')||'#111',fillColor:COL[p.t]});
-    markers[i].bringToFront();
-    var btns=box.querySelectorAll('.locbtn');
-    btns.forEach(function(b){b.classList.toggle('active',+b.dataset.i===i);});
-    var act=box.querySelector('.locbtn[data-i="'+i+'"]'); if(act){act.scrollIntoView({block:'nearest'});}
+    var focusZone=(p.z!=='solo')?p.z:null;
 
+    // 상대편 거리 순위
     var list=[];
     LOC.forEach(function(q,j){ if(q.t===opp){ list.push({j:j,q:q,d:km(p,q)}); }});
     list.sort(function(a,b){return a.d-b.d;});
+    var nearSet={}; list.slice(0,3).forEach(function(o){nearSet[o.j]=1;});
 
-    lineLayer.clearLayers();
-    list.forEach(function(o,rank){
-      L.polyline([[p.lat,p.lng],[o.q.lat,o.q.lng]],
-        {color:COL[p.t],weight:rank<3?2.5:1.2,opacity:rank<3?.85:.35,dashArray:'5,6'}).addTo(lineLayer);
-      if(rank<5){
-        var mid=[(p.lat+o.q.lat)/2,(p.lng+o.q.lng)/2];
-        L.marker(mid,{icon:L.divIcon({className:'kmlbl',html:o.d.toFixed(1)+'km',iconSize:[46,17]}),interactive:false}).addTo(lineLayer);
-      }
+    // 마커 아이콘/투명도
+    markers.forEach(function(mk,j){
+      mk.setIcon(icon(LOC[j].z,shapeOf(LOC[j]),j===i));
+      var dim = focusZone ? (LOC[j].z!==focusZone) : (j!==i && !nearSet[j]);
+      mk.setOpacity(dim?0.25:1);
     });
-    renderPanel(p,list,opp);
+    markers[i].setOpacity(1); markers[i].openTooltip();
 
-    var fb=[[p.lat,p.lng]];
-    list.slice(0,3).forEach(function(o){fb.push([o.q.lat,o.q.lng]);});
-    map.flyToBounds(fb,{padding:[55,55],maxZoom:12,duration:.6});
-    markers[i].openTooltip();
+    // 연결선 강조
+    connectors.forEach(function(c){
+      c.line.setStyle(focusZone && c.zone===focusZone ? {opacity:.95,weight:3} : {opacity:.1,weight:1.5});
+    });
+
+    // 단독 계곡: 가까운 숙소 3곳으로 점선 + 거리 라벨
+    emphLayer.clearLayers();
+    if(!focusZone){
+      list.slice(0,3).forEach(function(o){
+        L.polyline([[p.lat,p.lng],[o.q.lat,o.q.lng]],{color:'#8aa0a8',weight:2,opacity:.85,dashArray:'5,6'}).addTo(emphLayer);
+        var mid=[(p.lat+o.q.lat)/2,(p.lng+o.q.lng)/2];
+        L.marker(mid,{icon:L.divIcon({className:'kmlbl',html:o.d.toFixed(1)+'km',iconSize:[46,17]}),interactive:false}).addTo(emphLayer);
+      });
+    }
+
+    // 목록 활성화
+    box.querySelectorAll('.locbtn').forEach(function(b){b.classList.toggle('active',+b.dataset.i===i);});
+    var act=box.querySelector('.locbtn[data-i="'+i+'"]'); if(act){act.scrollIntoView({block:'nearest'});}
+    renderPanel(p,list,opp,focusZone);
   }
 
-  function renderPanel(p,list,opp){
+  function renderPanel(p,list,opp,focusZone){
     var el=document.getElementById('selinfo');
     var label=(opp==='stay')?'가까운 숙소':'가까운 계곡';
-    var h='<div class="st">'+p.n+' → '+label+' 순위</div><ol>';
+    var note = focusZone ? '' : '<div class="pnote">※ 이 계곡 바로 옆 숙소는 목록에 없어, 가까운 숙소 순으로 표시</div>';
+    var h='<div class="st">'+p.n+' → '+label+' 순위</div>'+note+'<ol>';
     list.forEach(function(o,idx){
-      h+='<li data-j="'+o.j+'"><span class="rank">'+(idx+1)+'</span><span>'+o.q.n+'</span><span class="km">'+o.d.toFixed(1)+'km</span></li>';
+      var mine = focusZone && LOC[o.j].z===focusZone;
+      h+='<li data-j="'+o.j+'" class="'+(mine?'mine':'')+'"><span class="rank">'+(idx+1)+'</span><span>'+o.q.n+'</span><span class="km">'+o.d.toFixed(1)+'km</span></li>';
     });
     h+='</ol>';
     el.innerHTML=h; el.classList.add('show');
@@ -648,11 +703,16 @@
   }
 
   function buildList(){
-    var groups=[['valley','계곡','v'],['stay','숙소','s']], h='';
-    groups.forEach(function(g){
-      h+='<div class="locgroup"><div class="gh">'+g[1]+'</div>';
-      LOC.forEach(function(p,i){ if(p.t!==g[0])return;
-        h+='<button class="locbtn" data-i="'+i+'" type="button"><span class="pin '+g[2]+'"></span><span class="nm">'+p.n+'</span><span class="mt">'+p.m+'</span></button>';
+    var order=[['daedun','대둔산·수락계곡권'],['jangtae','장태산권'],['donghak','동학사권'],['solo','단독 계곡 · 근처 숙소 없음']];
+    var h='';
+    order.forEach(function(g){
+      var items=[]; LOC.forEach(function(p,i){ if(p.z===g[0]) items.push(i); });
+      if(!items.length) return;
+      items.sort(function(a,b){ return (LOC[a].t==='valley'?0:1)-(LOC[b].t==='valley'?0:1); });
+      var gc = g[0]==='solo' ? 'var(--ink-faint)' : ZC[g[0]];
+      h+='<div class="locgroup"><div class="gh" style="color:'+gc+'">'+g[1]+'</div>';
+      items.forEach(function(i){ var p=LOC[i]; var v=p.t==='valley';
+        h+='<button class="locbtn'+(v?' vrow':'')+'" data-i="'+i+'" type="button"><span class="pin'+(v?' dia':'')+'" style="background:'+ZC[p.z]+'"></span><span class="nm">'+p.n+'</span><span class="mt">'+p.m+'</span></button>';
       });
       h+='</div>';
     });
@@ -662,20 +722,17 @@
   buildList();
 
   document.getElementById('mreset').addEventListener('click',function(){
-    selected=-1; resetMarkers(); lineLayer.clearLayers();
+    selected=-1; clearFocus();
     box.querySelectorAll('.locbtn').forEach(function(b){b.classList.remove('active');});
     var el=document.getElementById('selinfo'); el.classList.remove('show'); el.innerHTML='';
-    map.flyToBounds(allPts,{padding:[45,45],duration:.6});
+    map.fitBounds(allPts,{padding:[45,45]});   // '전체 보기' 버튼일 때만 뷰 리셋
   });
 
   var mq=matchMedia('(prefers-color-scheme: dark)');
   (mq.addEventListener?mq.addEventListener.bind(mq,'change'):mq.addListener.bind(mq))(function(){
-    COL={valley:cvar('--accent')||'#0d7d72',stay:cvar('--sand')||'#a86a2c'};
     tiles.setUrl(tileURL());
-    if(selected>=0){select(selected);}else{resetMarkers();}
+    if(selected>=0){select(selected);}
   });
-
-  map.on('click',function(){}); // container click no-op
 })();
 </script>
 </body>
