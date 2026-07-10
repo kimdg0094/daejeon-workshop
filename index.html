@@ -203,6 +203,36 @@
   .selinfo .pnote{font-size:.72rem;color:var(--ink-faint);margin:-3px 0 8px}
   .selinfo li.mine{color:var(--accent-deep);font-weight:700}
   .selinfo li.mine .km{color:var(--accent-deep)}
+  /* valley-centric map v2 */
+  .valleyLabel{background:var(--surface);color:var(--ink);border:1px solid var(--border-strong);border-radius:6px;font-weight:800;font-size:.72rem;padding:2px 7px;box-shadow:0 1px 4px rgba(0,0,0,.25);white-space:nowrap}
+  .valleyLabel::before{display:none!important}
+  .stayLabel{background:var(--surface);color:var(--ink);border:1px solid var(--border);border-radius:5px;font-size:.68rem;font-weight:700;padding:1px 5px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.3);width:max-content}
+  .stayLabel .d{color:var(--accent-deep);font-weight:800;margin-left:3px}
+  .stationmk{background:#c0392b;color:#fff;border:2px solid #fff;border-radius:6px;font-size:.72rem;font-weight:800;padding:2px 7px;white-space:nowrap;box-shadow:0 1px 5px rgba(0,0,0,.45);display:inline-block}
+  .lgh{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--ink-faint);margin-bottom:10px}
+  .vbtn{width:100%;text-align:left;border:1px solid var(--border);background:var(--surface-2);border-radius:9px;padding:9px 12px;font:inherit;color:var(--ink);cursor:pointer;display:flex;align-items:center;gap:10px;transition:border-color .15s,background .15s}
+  .vbtn+.vbtn{margin-top:7px}
+  .vbtn:hover{border-color:var(--accent)}
+  .vbtn.active{border-color:var(--accent);background:var(--accent-wash)}
+  .vbtn .pin{width:12px;height:12px;flex:none;border:2px solid #fff;box-shadow:0 0 0 1px var(--border-strong)}
+  .vbtn .pin.dia{border-radius:3px;transform:rotate(45deg)}
+  .vbtn .nm{font-weight:800;font-size:.95rem}
+  .vbtn .cnt{margin-left:auto;font-size:.72rem;font-weight:700;color:var(--ink-faint);background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:2px 9px;white-space:nowrap}
+  .selinfo .st{display:flex;align-items:center;gap:7px}
+  .selinfo .st .vd{width:11px;height:11px;border-radius:3px;transform:rotate(45deg);display:inline-block;border:2px solid #fff;box-shadow:0 0 0 1px var(--border-strong);flex:none}
+  .selinfo .srow{padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer}
+  .selinfo .srow:last-child{border-bottom:0}
+  .selinfo .srow:hover .snm{color:var(--accent-deep)}
+  .selinfo .s1{display:flex;align-items:baseline;gap:8px}
+  .selinfo .snm{font-weight:800;font-size:.9rem;color:var(--ink)}
+  .selinfo .sd{margin-left:auto;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink)}
+  .selinfo .s2{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:3px;font-size:.78rem;color:var(--ink-soft)}
+  .selinfo .spx{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+  .selinfo .srt{color:var(--good);font-weight:800}
+  .selinfo .sc{color:var(--ink-faint)}
+  .selinfo .book{margin-left:auto;text-decoration:none;font-weight:700;font-size:.75rem;color:var(--accent-deep);border:1px solid var(--border);border-radius:999px;padding:2px 9px;background:var(--surface)}
+  .selinfo .book:hover{border-color:var(--accent)}
+  .legend .lg-note{color:var(--ink-faint)}
 </style>
 
 <header class="hero">
@@ -212,7 +242,7 @@
     <p class="lede fade">대전 도심·근교에서 <b>발 담그고 놀 수 있는 계곡</b>과 <b>6명이 들어가는 숙소</b>를 가격·평점·<b>장단점(후기 근거 링크 포함)</b>까지 한 장에 모았습니다. 각 카드의 <b>후기↗</b> 버튼으로 근거를 바로 확인하세요.</p>
     <div class="metabar">
       <span class="metachip"><span class="dot"></span>계곡 <b>7곳</b></span>
-      <span class="metachip"><span class="dot"></span>6인 숙소 <b>9곳</b></span>
+      <span class="metachip"><span class="dot"></span>6인 숙소 <b>26곳</b></span>
       <span class="metachip">평점 <b>여기어때 10점 만점</b></span>
       <span class="metachip">기준 <b>2025~2026 여름</b></span>
     </div>
@@ -228,16 +258,13 @@
   <section class="mapsec">
     <div class="wrap">
       <div class="sec-head"><span class="sec-num">지도</span><h2>어디가 가까울까 — 지도로 거리 보기</h2></div>
-      <p class="sec-sub">계곡·숙소를 대전 지도에 찍었습니다. 목록에서 하나를 고르면 지도에서 강조되고 <b>상대편(계곡↔숙소)까지 직선거리</b>가 가까운 순으로 표시됩니다. 지도의 점을 직접 눌러도 됩니다.</p>
+      <p class="sec-sub"><b>대전역</b>(교통 기준)과 함께 계곡·숙소를 지도에 표시했습니다. 계곡 이름은 항상 보이고, 목록에서 <b>계곡</b>을 고르면 지도는 그대로 고정된 채 <b>주변 6인 숙소</b>가 이름·거리와 함께 뜨고 오른쪽에 가격·평점·예약링크가 정렬됩니다. 확대/축소는 <b>+/−</b> 버튼으로만.</p>
       <div class="maplayout">
         <div id="map"></div>
         <div class="mappanel">
           <div class="legend">
-            <span class="lg-sh"><b>◆</b>&nbsp;계곡 &nbsp; <b>●</b>&nbsp;숙소</span>
-            <span><i class="zc" style="background:#0e7c72"></i>대둔산·수락권</span>
-            <span><i class="zc" style="background:#3b6fd4"></i>장태산권</span>
-            <span><i class="zc" style="background:#8b5cf6"></i>동학사권</span>
-            <span><i class="zc" style="background:#8aa0a8"></i>단독 계곡</span>
+            <span class="lg-sh"><b>◆</b>&nbsp;계곡(이름 상시) &nbsp; <b>●</b>&nbsp;숙소 &nbsp; <b style="color:#c0392b">🚉</b>&nbsp;대전역</span>
+            <span class="lg-note">색상 = 계곡별 · 숙소는 소속 계곡 색</span>
           </div>
           <div class="loclist" id="loclist"></div>
           <div class="selinfo" id="selinfo"></div>
@@ -581,157 +608,147 @@
   var box=document.getElementById('loclist');
   if(!window.L||!box){ if(box){box.innerHTML='<p style="font-size:.85rem;color:var(--ink-faint)">지도를 불러오지 못했습니다. 네트워크 확인 후 새로고침해 주세요.</p>';} return; }
 
-  // z = 권역: daedun / jangtae / donghak / solo(근처 숙소 없는 단독 계곡)
-  var LOC=[
-    {n:"수통골 계곡",t:"valley",z:"solo",lat:36.329,lng:127.301,m:"무료·도심20분"},
-    {n:"상소동 산림욕장",t:"valley",z:"solo",lat:36.239,lng:127.492,m:"무료·물놀이장"},
-    {n:"동학사 계곡",t:"valley",z:"donghak",lat:36.341,lng:127.210,m:"7~8월·발만"},
-    {n:"대둔산 수락계곡",t:"valley",z:"daedun",lat:36.147,lng:127.319,m:"무료·폭포15m"},
-    {n:"장태산 자연휴양림",t:"valley",z:"jangtae",lat:36.222,lng:127.301,m:"입장료·숲"},
-    {n:"장령산 계곡",t:"valley",z:"solo",lat:36.246,lng:127.531,m:"무료·한적"},
-    {n:"청강수폭포 계곡",t:"valley",z:"solo",lat:36.164,lng:127.397,m:"가든·먹거리"},
-    {n:"대둔산 잉스힐펜션",t:"stay",z:"daedun",lat:36.145,lng:127.320,m:"15만·★9.8"},
-    {n:"논산 패밀리아펜션",t:"stay",z:"daedun",lat:36.158,lng:127.325,m:"15.8만·★9.8"},
-    {n:"대둔산빌리지 워터파크",t:"stay",z:"daedun",lat:36.150,lng:127.314,m:"8만~·수영장"},
-    {n:"대둔산 쉼마루펜션",t:"stay",z:"daedun",lat:36.152,lng:127.323,m:"18만·★9.7"},
-    {n:"대둔산 사계절펜션",t:"stay",z:"daedun",lat:36.135,lng:127.345,m:"문의·★8.4"},
-    {n:"대둔산아리아펜션",t:"stay",z:"daedun",lat:36.149,lng:127.322,m:"통나무·대형"},
-    {n:"장태산 숲속의집",t:"stay",z:"jangtae",lat:36.220,lng:127.303,m:"7.5만·가성비"},
-    {n:"숲속의작은집",t:"stay",z:"jangtae",lat:36.216,lng:127.299,m:"28~35만·독채"},
-    {n:"계룡산동학사펜션",t:"stay",z:"donghak",lat:36.335,lng:127.230,m:"27~28만·6~12인"}
+  var VALLEYS=[
+    {id:'sutong',n:'수통골 계곡',c:'#2f9e44',lat:36.329,lng:127.301},
+    {id:'sangso',n:'상소동 산림욕장',c:'#e8842b',lat:36.239,lng:127.492},
+    {id:'donghak',n:'동학사 계곡',c:'#7c5cd6',lat:36.341,lng:127.210},
+    {id:'daedun',n:'대둔산 수락계곡',c:'#0e8a7e',lat:36.147,lng:127.319},
+    {id:'jangtae',n:'장태산 자연휴양림',c:'#3b6fd4',lat:36.222,lng:127.301},
+    {id:'jangryeong',n:'장령산 계곡',c:'#d6455f',lat:36.246,lng:127.531},
+    {id:'cheong',n:'청강수폭포 계곡',c:'#b8860b',lat:36.164,lng:127.397}
   ];
-  var ZC={daedun:'#0e7c72',jangtae:'#3b6fd4',donghak:'#8b5cf6',solo:'#8aa0a8'};
-  function cvar(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
-
-  // 권역 대표 계곡 index
-  var zoneValley={};
-  LOC.forEach(function(p,i){ if(p.t==='valley' && p.z!=='solo' && zoneValley[p.z]==null) zoneValley[p.z]=i; });
-
-  var map=L.map('map',{scrollWheelZoom:false,doubleClickZoom:false,boxZoom:false}).setView([36.25,127.37],10);
-  function tileURL(){var d=matchMedia('(prefers-color-scheme: dark)').matches;
-    return 'https://{s}.basemaps.cartocdn.com/'+(d?'dark_all':'light_all')+'/{z}/{x}/{y}{r}.png';}
-  var tiles=L.tileLayer(tileURL(),{subdomains:'abcd',maxZoom:19,attribution:'&copy; OpenStreetMap &copy; CARTO'}).addTo(map);
-
-  function icon(z,shape,sel){
-    return L.divIcon({className:'mkwrap',iconSize:[26,26],iconAnchor:[13,13],
-      html:'<span class="mk '+shape+(sel?' sel':'')+'" style="background:'+ZC[z]+'"></span>'});
-  }
-  function shapeOf(p){return p.t==='valley'?'v':'s';}
-
-  // 항상 표시되는 권역 연결선 (숙소 → 소속 계곡)
-  var connectors=[];
-  LOC.forEach(function(p){
-    if(p.t==='stay' && zoneValley[p.z]!=null){
-      var v=LOC[zoneValley[p.z]];
-      var ln=L.polyline([[v.lat,v.lng],[p.lat,p.lng]],{color:ZC[p.z],weight:1.5,opacity:.5,dashArray:'4,5'}).addTo(map);
-      connectors.push({line:ln,zone:p.z});
-    }
-  });
-
-  var emphLayer=L.layerGroup().addTo(map);
-  var markers=[], allPts=[], selected=-1;
-  LOC.forEach(function(p,i){
-    var mk=L.marker([p.lat,p.lng],{icon:icon(p.z,shapeOf(p),false)}).addTo(map);
-    mk.bindTooltip(p.n,{direction:'top',offset:[0,-9]});
-    mk.on('click',function(){select(i);});
-    markers.push(mk); allPts.push([p.lat,p.lng]);
-  });
-  map.fitBounds(allPts,{padding:[45,45]});
+  var Y_NONSAN='https://www.yeogi.com/kr/pension/%EC%B6%A9%EB%82%A8/%EB%85%BC%EC%82%B0/%EB%85%BC%EC%82%B0%EC%8B%9C%EC%88%98%EB%9D%BD%EA%B3%84%EA%B3%A1',
+      Y_JANGTAE='https://www.yeogi.com/accommodation/pension/kr/attraction/%EC%84%9C%EA%B5%AC%EC%9E%A5%ED%83%9C%EC%82%B0%EC%9E%90%EC%97%B0%ED%9C%B4%EC%96%91%EB%A6%BC',
+      Y_DONGHAK='https://www.yeogi.com/kr/pension/%EC%B6%A9%EB%82%A8/%EA%B3%B5%EC%A3%BC/%EA%B3%B5%EC%A3%BC%EC%8B%9C%EB%8F%99%ED%95%99%EC%82%AC%EA%B3%84%EA%B3%A1',
+      Y_OKCHEON='https://www.yeogi.com/accommodation/pension/kr/%EC%B6%A9%EC%B2%AD%EB%B6%81%EB%8F%84/%EC%98%A5%EC%B2%9C%EA%B5%B0';
+  var STAYS=[
+    {v:'daedun',n:'대둔산 잉스힐펜션',p:'15만',r:'9.8',c:'후기17',lat:36.145,lng:127.322,u:'https://place-site.yanolja.com/places/1000106303'},
+    {v:'daedun',n:'논산 패밀리아펜션',p:'15.8만',r:'9.8',c:'후기9·가족룸',lat:36.158,lng:127.327,u:Y_NONSAN},
+    {v:'daedun',n:'대둔산빌리지 워터파크',p:'8만~',r:'',c:'워터슬라이드',lat:36.151,lng:127.312,u:'https://nol.yanolja.com/stay/domestic/10050389'},
+    {v:'daedun',n:'대둔산 쉼마루펜션',p:'18만',r:'9.7',c:'후기2·족구장',lat:36.153,lng:127.325,u:Y_NONSAN},
+    {v:'daedun',n:'대둔산 사계절펜션',p:'문의',r:'8.4',c:'후기4·수영장',lat:36.136,lng:127.339,u:'https://kr.hotels.com/ho1482648640/'},
+    {v:'daedun',n:'대둔산아리아펜션',p:'문의',r:'',c:'통나무·대형',lat:36.148,lng:127.316,u:'https://nol.yanolja.com/stay/domestic/1000103856'},
+    {v:'jangtae',n:'장태산 숲속의집',p:'7.5만~',r:'',c:'국가운영·가성비',lat:36.220,lng:127.305,u:'https://billion.dalmi-info.com/2024/10/jangtaesan-nature-reserve-accommodation-and-pricing.html'},
+    {v:'jangtae',n:'숲속의작은집',p:'28~35만',r:'',c:'독채·4~6인',lat:36.216,lng:127.297,u:'https://www.allstay.com/alltrip/post/jangtaesan-natural-recreation-forest-and-accommodationsnearby'},
+    {v:'jangtae',n:'장태산민가가든',p:'10만',r:'9.7',c:'후기95·세미나실',lat:36.225,lng:127.307,u:Y_JANGTAE},
+    {v:'jangtae',n:'파파지붕&마마펜션',p:'21만',r:'9.6',c:'후기14',lat:36.218,lng:127.295,u:Y_JANGTAE},
+    {v:'jangtae',n:'풀내음쉼터',p:'10만',r:'9.5',c:'후기30·운동장',lat:36.227,lng:127.302,u:Y_JANGTAE},
+    {v:'jangtae',n:'대전 힐스테이펜션',p:'16만~',r:'9.2',c:'후기20·야외수영장',lat:36.212,lng:127.309,u:'https://nol.yanolja.com/stay/domestic/10063200'},
+    {v:'jangtae',n:'장태산루체',p:'26만',r:'7.9',c:'후기22·단체',lat:36.223,lng:127.299,u:Y_JANGTAE},
+    {v:'donghak',n:'계룡산동학사펜션',p:'17만',r:'9.2',c:'후기44·6~50인',lat:36.335,lng:127.231,u:Y_DONGHAK},
+    {v:'donghak',n:'공주 포레스트스테이',p:'31.9만',r:'9.8',c:'후기78·월풀스파',lat:36.352,lng:127.243,u:Y_DONGHAK},
+    {v:'donghak',n:'계룡산1박2일펜션',p:'24만',r:'9.4',c:'후기20·2~10인',lat:36.344,lng:127.237,u:Y_DONGHAK},
+    {v:'donghak',n:'계룡산 드림펜션',p:'37만',r:'10',c:'후기2',lat:36.348,lng:127.241,u:Y_DONGHAK},
+    {v:'donghak',n:'계룡산동학사스타펜션',p:'9만~',r:'',c:'6~13인·노래방',lat:36.337,lng:127.234,u:'https://nol.yanolja.com/stay/domestic/1000106447'},
+    {v:'donghak',n:'동학사 행복펜션',p:'40만',r:'',c:'6~12인·계곡앞',lat:36.339,lng:127.228,u:'https://place-site.yanolja.com/places/10055361'},
+    {v:'jangryeong',n:'옥천 새봄단체펜션',p:'문의',r:'9.8',c:'후기12·300평잔디',lat:36.253,lng:127.520,u:'https://nol.yanolja.com/stay/domestic/10061578'},
+    {v:'jangryeong',n:'옥천 하늘농원펜션',p:'23만',r:'10',c:'후기1·14인',lat:36.278,lng:127.503,u:Y_OKCHEON},
+    {v:'jangryeong',n:'옥천 소막대기펜션',p:'43.5만',r:'8.4',c:'후기3·가족단체',lat:36.300,lng:127.565,u:'https://nol.yanolja.com/stay/domestic/10055172'},
+    {v:'jangryeong',n:'옥천 장령골펜션',p:'문의',r:'',c:'독채·노래방·BBQ',lat:36.243,lng:127.536,u:'https://nol.yanolja.com/stay/domestic/10061535'},
+    {v:'cheong',n:'청강수계곡가든펜션',p:'13~25만',r:'',c:'6~8인·계곡앞·평상무료',lat:36.166,lng:127.394,u:'https://place-site.yanolja.com/places/1000114278'},
+    {v:'sutong',n:'대전 스테이안영',p:'문의',r:'',c:'4~9인·인피니티풀·대전역근처',lat:36.288,lng:127.362,u:'https://nol.yanolja.com/stay/domestic/10066182'},
+    {v:'sangso',n:'대전 대청호펜션',p:'문의',r:'',c:'대청호·초과+1만/인',lat:36.372,lng:127.478,u:'https://place-site.yanolja.com/places/10062855'}
+  ];
+  var STATION={n:'대전역',lat:36.3316,lng:127.4343};
 
   function km(a,b){var R=6371,rad=Math.PI/180,
     dLa=(b.lat-a.lat)*rad,dLo=(b.lng-a.lng)*rad,
     h=Math.sin(dLa/2)*Math.sin(dLa/2)+Math.cos(a.lat*rad)*Math.cos(b.lat*rad)*Math.sin(dLo/2)*Math.sin(dLo/2);
     return 2*R*Math.asin(Math.sqrt(h));}
+  var VC={}, byV={}; VALLEYS.forEach(function(v){VC[v.id]=v.c;byV[v.id]=[];});
+  STAYS.forEach(function(s,i){ byV[s.v].push(i); });
+  function vidx(id){for(var k=0;k<VALLEYS.length;k++){if(VALLEYS[k].id===id)return k;}return -1;}
 
-  function clearFocus(){
-    markers.forEach(function(mk,j){ mk.setIcon(icon(LOC[j].z,shapeOf(LOC[j]),false)); mk.setOpacity(1); });
-    connectors.forEach(function(c){ c.line.setStyle({opacity:.5,weight:1.5}); });
-    emphLayer.clearLayers();
+  var map=L.map('map',{scrollWheelZoom:false,doubleClickZoom:false,boxZoom:false}).setView([36.28,127.37],10);
+  function tileURL(){var d=matchMedia('(prefers-color-scheme: dark)').matches;
+    return 'https://{s}.basemaps.cartocdn.com/'+(d?'dark_all':'light_all')+'/{z}/{x}/{y}{r}.png';}
+  var tiles=L.tileLayer(tileURL(),{subdomains:'abcd',maxZoom:19,attribution:'&copy; OpenStreetMap &copy; CARTO'}).addTo(map);
+
+  function vIcon(v,sel){return L.divIcon({className:'mkwrap',iconSize:[26,26],iconAnchor:[13,13],
+    html:'<span class="mk v'+(sel?' sel':'')+'" style="background:'+v.c+'"></span>'});}
+
+  var emph=L.layerGroup().addTo(map), allPts=[], selectedV=-1;
+
+  var vMk=[];
+  VALLEYS.forEach(function(v,vi){
+    var mk=L.marker([v.lat,v.lng],{icon:vIcon(v,false),zIndexOffset:600}).addTo(map);
+    mk.bindTooltip(v.n,{permanent:true,direction:'top',offset:[0,-11],className:'valleyLabel'});
+    mk.on('click',function(){selectValley(vi);});
+    vMk.push(mk); allPts.push([v.lat,v.lng]);
+  });
+  var sMk=[];
+  STAYS.forEach(function(s,si){
+    var mk=L.marker([s.lat,s.lng],{icon:L.divIcon({className:'mkwrap',iconSize:[18,18],iconAnchor:[9,9],html:'<span class="mk s" style="background:'+VC[s.v]+'"></span>'})}).addTo(map);
+    mk.bindTooltip(s.n,{direction:'right',offset:[8,0]});
+    mk.on('click',function(){ if(selectedV>=0){highlightStay(si);} else {selectValley(vidx(s.v));} });
+    sMk.push(mk); allPts.push([s.lat,s.lng]);
+  });
+  L.marker([STATION.lat,STATION.lng],{icon:L.divIcon({className:'mkwrap',iconSize:[70,20],iconAnchor:[35,10],html:'<span class="stationmk">🚉 대전역</span>'}),zIndexOffset:400,interactive:false}).addTo(map);
+  allPts.push([STATION.lat,STATION.lng]);
+  map.fitBounds(allPts,{padding:[40,40]});
+
+  function highlightStay(si){
+    var s=STAYS[si];
+    var c=L.circleMarker([s.lat,s.lng],{radius:13,color:VC[s.v],weight:3,fill:false,opacity:1}).addTo(emph);
+    setTimeout(function(){ emph.removeLayer(c); },1300);
   }
 
-  function select(i){   // 뷰(확대/이동)는 절대 변경하지 않음 — 강조만
-    selected=i; var p=LOC[i], opp=(p.t==='valley')?'stay':'valley';
-    var focusZone=(p.z!=='solo')?p.z:null;
+  function selectValley(vi){
+    selectedV=vi; var v=VALLEYS[vi];
+    emph.clearLayers();
+    vMk.forEach(function(mk,k){ mk.setIcon(vIcon(VALLEYS[k],k===vi)); mk.setOpacity(k===vi?1:0.3); });
+    sMk.forEach(function(mk,si){ mk.setOpacity(STAYS[si].v===v.id?1:0.12); });
 
-    // 상대편 거리 순위
-    var list=[];
-    LOC.forEach(function(q,j){ if(q.t===opp){ list.push({j:j,q:q,d:km(p,q)}); }});
-    list.sort(function(a,b){return a.d-b.d;});
-    var nearSet={}; list.slice(0,3).forEach(function(o){nearSet[o.j]=1;});
-
-    // 마커 아이콘/투명도
-    markers.forEach(function(mk,j){
-      mk.setIcon(icon(LOC[j].z,shapeOf(LOC[j]),j===i));
-      var dim = focusZone ? (LOC[j].z!==focusZone) : (j!==i && !nearSet[j]);
-      mk.setOpacity(dim?0.25:1);
+    var items=byV[v.id].map(function(si){ return {si:si,s:STAYS[si],d:km(v,STAYS[si])}; });
+    items.sort(function(a,b){return a.d-b.d;});
+    items.forEach(function(o){
+      L.polyline([[v.lat,v.lng],[o.s.lat,o.s.lng]],{color:v.c,weight:1.6,opacity:.7,dashArray:'4,5'}).addTo(emph);
+      L.marker([o.s.lat,o.s.lng],{interactive:false,zIndexOffset:700,
+        icon:L.divIcon({className:'stayLabel',iconSize:[120,18],iconAnchor:[-7,9],html:o.s.n+' <span class="d">'+o.d.toFixed(1)+'km</span>'})}).addTo(emph);
     });
-    markers[i].setOpacity(1); markers[i].openTooltip();
+    var dst=km(v,STATION);
+    L.polyline([[STATION.lat,STATION.lng],[v.lat,v.lng]],{color:'#c0392b',weight:2,opacity:.55,dashArray:'2,6'}).addTo(emph);
 
-    // 연결선 강조
-    connectors.forEach(function(c){
-      c.line.setStyle(focusZone && c.zone===focusZone ? {opacity:.95,weight:3} : {opacity:.1,weight:1.5});
-    });
-
-    // 단독 계곡: 가까운 숙소 3곳으로 점선 + 거리 라벨
-    emphLayer.clearLayers();
-    if(!focusZone){
-      list.slice(0,3).forEach(function(o){
-        L.polyline([[p.lat,p.lng],[o.q.lat,o.q.lng]],{color:'#8aa0a8',weight:2,opacity:.85,dashArray:'5,6'}).addTo(emphLayer);
-        var mid=[(p.lat+o.q.lat)/2,(p.lng+o.q.lng)/2];
-        L.marker(mid,{icon:L.divIcon({className:'kmlbl',html:o.d.toFixed(1)+'km',iconSize:[46,17]}),interactive:false}).addTo(emphLayer);
-      });
-    }
-
-    // 목록 활성화
-    box.querySelectorAll('.locbtn').forEach(function(b){b.classList.toggle('active',+b.dataset.i===i);});
-    var act=box.querySelector('.locbtn[data-i="'+i+'"]'); if(act){act.scrollIntoView({block:'nearest'});}
-    renderPanel(p,list,opp,focusZone);
+    box.querySelectorAll('.vbtn').forEach(function(b){b.classList.toggle('active',+b.dataset.vi===vi);});
+    renderPanel(v,items,dst);
   }
 
-  function renderPanel(p,list,opp,focusZone){
+  function renderPanel(v,items,dst){
     var el=document.getElementById('selinfo');
-    var label=(opp==='stay')?'가까운 숙소':'가까운 계곡';
-    var note = focusZone ? '' : '<div class="pnote">※ 이 계곡 바로 옆 숙소는 목록에 없어, 가까운 숙소 순으로 표시</div>';
-    var h='<div class="st">'+p.n+' → '+label+' 순위</div>'+note+'<ol>';
-    list.forEach(function(o,idx){
-      var mine = focusZone && LOC[o.j].z===focusZone;
-      h+='<li data-j="'+o.j+'" class="'+(mine?'mine':'')+'"><span class="rank">'+(idx+1)+'</span><span>'+o.q.n+'</span><span class="km">'+o.d.toFixed(1)+'km</span></li>';
+    var h='<div class="st"><span class="vd" style="background:'+v.c+'"></span>'+v.n+' 주변 6인 숙소 <b>'+items.length+'곳</b></div>';
+    h+='<div class="pnote">🚉 대전역 → 이 계곡 직선 '+dst.toFixed(1)+'km</div>';
+    items.forEach(function(o){
+      var r=o.s.r?'<span class="srt">★'+o.s.r+'</span>':'';
+      h+='<div class="srow" data-si="'+o.si+'"><div class="s1"><span class="snm">'+o.s.n+'</span><span class="sd">'+o.d.toFixed(1)+'km</span></div>'+
+         '<div class="s2"><span class="spx">'+o.s.p+'</span>'+r+'<span class="sc">'+o.s.c+'</span><a class="book" href="'+o.s.u+'" target="_blank" rel="noopener">예약↗</a></div></div>';
     });
-    h+='</ol>';
     el.innerHTML=h; el.classList.add('show');
-    el.querySelectorAll('li').forEach(function(li){li.addEventListener('click',function(){select(+li.dataset.j);});});
+    el.querySelectorAll('.srow').forEach(function(row){ row.addEventListener('click',function(e){ if(e.target.classList.contains('book'))return; highlightStay(+row.dataset.si); }); });
   }
 
   function buildList(){
-    var order=[['daedun','대둔산·수락계곡권'],['jangtae','장태산권'],['donghak','동학사권'],['solo','단독 계곡 · 근처 숙소 없음']];
-    var h='';
-    order.forEach(function(g){
-      var items=[]; LOC.forEach(function(p,i){ if(p.z===g[0]) items.push(i); });
-      if(!items.length) return;
-      items.sort(function(a,b){ return (LOC[a].t==='valley'?0:1)-(LOC[b].t==='valley'?0:1); });
-      var gc = g[0]==='solo' ? 'var(--ink-faint)' : ZC[g[0]];
-      h+='<div class="locgroup"><div class="gh" style="color:'+gc+'">'+g[1]+'</div>';
-      items.forEach(function(i){ var p=LOC[i]; var v=p.t==='valley';
-        h+='<button class="locbtn'+(v?' vrow':'')+'" data-i="'+i+'" type="button"><span class="pin'+(v?' dia':'')+'" style="background:'+ZC[p.z]+'"></span><span class="nm">'+p.n+'</span><span class="mt">'+p.m+'</span></button>';
-      });
-      h+='</div>';
+    var h='<div class="lgh">계곡을 선택하세요 (7곳)</div>';
+    VALLEYS.forEach(function(v,vi){
+      h+='<button class="vbtn" data-vi="'+vi+'" type="button"><span class="pin dia" style="background:'+v.c+'"></span><span class="nm">'+v.n+'</span><span class="cnt">숙소 '+byV[v.id].length+'</span></button>';
     });
     box.innerHTML=h;
-    box.querySelectorAll('.locbtn').forEach(function(b){b.addEventListener('click',function(){select(+b.dataset.i);});});
+    box.querySelectorAll('.vbtn').forEach(function(b){b.addEventListener('click',function(){selectValley(+b.dataset.vi);});});
   }
   buildList();
 
   document.getElementById('mreset').addEventListener('click',function(){
-    selected=-1; clearFocus();
-    box.querySelectorAll('.locbtn').forEach(function(b){b.classList.remove('active');});
+    selectedV=-1; emph.clearLayers();
+    vMk.forEach(function(mk,k){ mk.setIcon(vIcon(VALLEYS[k],false)); mk.setOpacity(1); });
+    sMk.forEach(function(mk){ mk.setOpacity(.9); });
+    box.querySelectorAll('.vbtn').forEach(function(b){b.classList.remove('active');});
     var el=document.getElementById('selinfo'); el.classList.remove('show'); el.innerHTML='';
-    map.fitBounds(allPts,{padding:[45,45]});   // '전체 보기' 버튼일 때만 뷰 리셋
+    map.fitBounds(allPts,{padding:[40,40]});
   });
 
   var mq=matchMedia('(prefers-color-scheme: dark)');
   (mq.addEventListener?mq.addEventListener.bind(mq,'change'):mq.addListener.bind(mq))(function(){
     tiles.setUrl(tileURL());
-    if(selected>=0){select(selected);}
+    if(selectedV>=0){selectValley(selectedV);}
   });
 })();
 </script>
