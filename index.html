@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대전 워크샵 · 6인</title>
+</head>
+<body>
+<title>대전 워크샵 · 6인</title>
+<style>
+  :root{
+    --paper:#eef4f1;--surface:#ffffff;--surface-2:#f5f9f7;
+    --ink:#132019;--ink-soft:#48584f;--ink-faint:#71847a;
+    --accent:#0d7d72;--accent-deep:#0a5c54;--accent-wash:#dbeeea;
+    --sand:#a86a2c;--sand-wash:#f3e6d3;
+    --good:#1c7a4d;--good-wash:#dcefe3;
+    --bad:#b0483a;--bad-wash:#f4e2de;
+    --warn:#9a6512;
+    --border:#d7e3dd;--border-strong:#c1d2cb;
+    --shadow:0 1px 2px rgba(19,32,25,.05),0 8px 24px -12px rgba(19,32,25,.18);
+    --radius:14px;--maxw:1120px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#0d1512;--surface:#15211c;--surface-2:#1a2721;
+      --ink:#e7efeb;--ink-soft:#a6bab0;--ink-faint:#7c9188;
+      --accent:#41b6a7;--accent-deep:#5fc9bb;--accent-wash:#123029;
+      --sand:#d29a55;--sand-wash:#2e2417;
+      --good:#57c188;--good-wash:#12291d;
+      --bad:#e08b7e;--bad-wash:#2e1a16;
+      --warn:#d3a24e;
+      --border:#26332d;--border-strong:#33443c;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="light"]{
+    --paper:#eef4f1;--surface:#ffffff;--surface-2:#f5f9f7;--ink:#132019;--ink-soft:#48584f;--ink-faint:#71847a;
+    --accent:#0d7d72;--accent-deep:#0a5c54;--accent-wash:#dbeeea;--sand:#a86a2c;--sand-wash:#f3e6d3;
+    --good:#1c7a4d;--good-wash:#dcefe3;--bad:#b0483a;--bad-wash:#f4e2de;--warn:#9a6512;
+    --border:#d7e3dd;--border-strong:#c1d2cb;--shadow:0 1px 2px rgba(19,32,25,.05),0 8px 24px -12px rgba(19,32,25,.18);
+  }
+  :root[data-theme="dark"]{
+    --paper:#0d1512;--surface:#15211c;--surface-2:#1a2721;--ink:#e7efeb;--ink-soft:#a6bab0;--ink-faint:#7c9188;
+    --accent:#41b6a7;--accent-deep:#5fc9bb;--accent-wash:#123029;--sand:#d29a55;--sand-wash:#2e2417;
+    --good:#57c188;--good-wash:#12291d;--bad:#e08b7e;--bad-wash:#2e1a16;--warn:#d3a24e;
+    --border:#26332d;--border-strong:#33443c;--shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Pretendard","Pretendard Variable","Apple SD Gothic Neo","Malgun Gothic","맑은 고딕","Noto Sans KR",system-ui,sans-serif;
+    line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+  a{color:var(--accent-deep);text-underline-offset:2px}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--border);
+    background:radial-gradient(120% 90% at 88% -15%,var(--accent-wash),transparent 58%),linear-gradient(180deg,var(--surface),var(--surface-2))}
+  .hero .wrap{padding:44px 20px 38px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--accent-deep);margin:0 0 15px}
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--accent);border-radius:2px}
+  h1{font-size:clamp(2rem,5.2vw,3.15rem);line-height:1.08;letter-spacing:-.02em;font-weight:800;margin:0 0 14px;text-wrap:balance}
+  h1 em{font-style:normal;color:var(--accent-deep)}
+  .lede{font-size:1.04rem;color:var(--ink-soft);max-width:62ch;margin:0 0 22px}
+  .metabar{display:flex;flex-wrap:wrap;gap:8px}
+  .metachip{display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);padding:7px 13px;border-radius:999px;font-size:.82rem;color:var(--ink-soft);box-shadow:var(--shadow)}
+  .metachip b{color:var(--ink);font-weight:700}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+
+  /* share banner */
+  .share{margin-top:22px;display:flex;align-items:flex-start;gap:12px;background:var(--accent-wash);border:1px solid color-mix(in srgb,var(--accent) 32%,transparent);border-radius:12px;padding:13px 16px}
+  .share svg{flex:none;margin-top:2px}
+  .share p{margin:0;font-size:.87rem;color:var(--ink)}
+  .share b{font-weight:800}
+
+  section{padding:50px 0}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:4px;flex-wrap:wrap}
+  .sec-num{font-size:.8rem;font-weight:800;color:var(--accent);letter-spacing:.12em;font-variant-numeric:tabular-nums}
+  h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-.015em;margin:0;text-wrap:balance}
+  .sec-sub{color:var(--ink-soft);margin:8px 0 28px;max-width:70ch}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .card h3{font-size:1.2rem;font-weight:800;margin:0;letter-spacing:-.01em}
+  .card .region{font-size:.8rem;color:var(--ink-faint);margin-top:3px;font-weight:600}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+  .tag{font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+  .tag.free{background:var(--good-wash);color:var(--good)}
+  .tag.paid{background:var(--sand-wash);color:var(--warn)}
+  .tag.zone{background:var(--accent-wash);color:var(--accent-deep)}
+
+  .statline{display:flex;flex-wrap:wrap;gap:8px 18px;padding:12px 14px;background:var(--surface-2);border-radius:10px;font-size:.86rem}
+  .stat{display:flex;flex-direction:column;gap:1px;min-width:0}
+  .stat .k{font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+  .stat .v{font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums}
+  .stat .v small{font-weight:600;color:var(--ink-faint);font-size:.72rem}
+  .rate{display:inline-flex;align-items:baseline;gap:3px}
+  .rate.hi{color:var(--good)}.rate.mid{color:var(--accent-deep)}.rate.na{color:var(--ink-faint)}
+
+  .pc{display:grid;gap:9px}
+  .pc ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+  .pc li{position:relative;padding-left:22px;font-size:.87rem;color:var(--ink-soft);line-height:1.5}
+  .pros li::before{content:"＋";position:absolute;left:0;top:0;color:var(--good);font-weight:800}
+  .cons li::before{content:"－";position:absolute;left:1px;top:0;color:var(--bad);font-weight:800}
+  .pc li b{color:var(--ink);font-weight:700}
+
+  .refs{display:flex;flex-wrap:wrap;gap:6px;border-top:1px dashed var(--border-strong);padding-top:12px;margin-top:auto}
+  .refs .lbl{font-size:.72rem;font-weight:700;color:var(--ink-faint);align-self:center;margin-right:2px}
+  .refs a{font-size:.75rem;text-decoration:none;background:var(--surface-2);border:1px solid var(--border);color:var(--ink-soft);padding:4px 10px;border-radius:999px;display:inline-flex;align-items:center;gap:4px;transition:border-color .15s,color .15s}
+  .refs a:hover{border-color:var(--accent);color:var(--accent-deep)}
+  .refs a::after{content:"↗";font-size:.72em;opacity:.7}
+
+  /* scenario picker */
+  .scenarios{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .scn{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;box-shadow:var(--shadow);border-top:3px solid var(--accent)}
+  .scn .who{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-deep);font-weight:800;margin-bottom:8px}
+  .scn .pick{font-size:1.05rem;font-weight:800;margin-bottom:6px;line-height:1.3}
+  .scn p{margin:0;font-size:.85rem;color:var(--ink-soft)}
+
+  /* tips + course */
+  .two{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:start}
+  @media(max-width:780px){.two{grid-template-columns:1fr}}
+  .tips{display:flex;flex-direction:column;gap:12px}
+  .tip{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
+  .tip b{display:block;font-weight:800;margin-bottom:3px;font-size:.95rem}
+  .tip span{font-size:.86rem;color:var(--ink-soft)}
+  .course{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+  .course h3{margin:0 0 4px;font-size:1.15rem;font-weight:800}
+  .course .cs-sub{font-size:.82rem;color:var(--ink-faint);margin:0 0 18px;font-weight:600}
+  ol.timeline{list-style:none;margin:0;padding:0}
+  ol.timeline li{position:relative;padding:0 0 18px 26px}
+  ol.timeline li::before{content:"";position:absolute;left:5px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+  ol.timeline li::after{content:"";position:absolute;left:9px;top:15px;bottom:0;width:1px;background:var(--border-strong)}
+  ol.timeline li:last-child{padding-bottom:0}ol.timeline li:last-child::after{display:none}
+  ol.timeline .t{font-weight:800;font-size:.86rem;color:var(--accent-deep)}
+  ol.timeline .d{font-size:.9rem;color:var(--ink-soft)}
+  ol.timeline .d b{color:var(--ink);font-weight:700}
+
+  .callout{background:var(--sand-wash);border:1px solid color-mix(in srgb,var(--sand) 30%,transparent);border-radius:12px;padding:14px 18px;margin-top:24px;font-size:.88rem;color:var(--ink-soft)}
+  .callout b{color:var(--warn)}
+
+  footer{border-top:1px solid var(--border);background:var(--surface-2);padding:34px 0 46px}
+  footer h4{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 14px;font-weight:800}
+  .srcs{display:flex;flex-wrap:wrap;gap:8px 10px;margin-bottom:20px}
+  .srcs a{font-size:.8rem;background:var(--surface);border:1px solid var(--border);padding:6px 12px;border-radius:999px;color:var(--ink-soft);text-decoration:none}
+  .srcs a:hover{border-color:var(--accent);color:var(--accent-deep)}
+  .disc{font-size:.78rem;color:var(--ink-faint);max-width:78ch}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+  .fade{opacity:0;transform:translateY(10px);animation:rise .55s cubic-bezier(.2,.7,.3,1) forwards}
+  .fade:nth-child(2){animation-delay:.05s}.fade:nth-child(3){animation-delay:.1s}
+  @keyframes rise{to{opacity:1;transform:none}}
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow fade">여름 물놀이 · 6인 기준 · 함께 보는 여행 보드</p>
+    <h1 class="fade">대전 워크샵 <em>6인</em></h1>
+    <p class="lede fade">대전 도심·근교에서 <b>발 담그고 놀 수 있는 계곡</b>과 <b>6명이 들어가는 숙소</b>를 가격·평점·<b>장단점(후기 근거 링크 포함)</b>까지 한 장에 모았습니다. 각 카드의 <b>후기↗</b> 버튼으로 근거를 바로 확인하세요.</p>
+    <div class="metabar">
+      <span class="metachip"><span class="dot"></span>계곡 <b>7곳</b></span>
+      <span class="metachip"><span class="dot"></span>6인 숙소 <b>9곳</b></span>
+      <span class="metachip">평점 <b>여기어때 10점 만점</b></span>
+      <span class="metachip">기준 <b>2025~2026 여름</b></span>
+    </div>
+    <div class="share fade">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-deep)"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.5" x2="15.4" y2="6.5"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/></svg>
+      <p><b>함께 가는 사람과 공유하려면</b> — 오른쪽 위 <b>공유(Share)</b> 버튼을 눌러 링크를 보내면 모두 같은 화면을 봅니다. 아래 <b>시나리오별 추천</b>을 보고 어디로 갈지 함께 정해보세요.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ============ 시나리오 ============ -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">01</span><h2>우리 팀은 어디로? — 시나리오별 추천</h2></div>
+      <p class="sec-sub">6명이 무엇을 가장 원하는지에 따라 조합을 골라보세요. 아래 계곡·숙소 상세와 연결됩니다.</p>
+      <div class="scenarios">
+        <div class="scn">
+          <div class="who">아이 동반 · 안전 최우선</div>
+          <div class="pick">상소동 산림욕장</div>
+          <p>무료 + 수심 60~80cm + 안전요원. 숙소는 워터파크 있는 <b>대둔산빌리지</b> 조합.</p>
+        </div>
+        <div class="scn">
+          <div class="who">제대로 계곡 물놀이 + 1박</div>
+          <div class="pick">대둔산 수락계곡 + 잉스힐펜션</div>
+          <p>차가운 암반계곡·15m 폭포, 평점 <b>9.8</b> 펜션이 도보권. 6인 이상 단체에 최적.</p>
+        </div>
+        <div class="scn">
+          <div class="who">가성비 · 숲속 감성</div>
+          <div class="pick">장태산 숲속의집 6인실</div>
+          <p>국가 운영 <b>7.5만원</b>(비수기). 메타세쿼이아 숲. 단, 예약 경쟁 치열.</p>
+        </div>
+        <div class="scn">
+          <div class="who">한적함 · 프라이빗</div>
+          <div class="pick">옥천 장령산 + 독채펜션</div>
+          <p>대전 20분인데 붐비지 않음. 프라이빗을 원하면 <b>숲속의작은집</b> 독채.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 계곡 ============ -->
+  <section style="padding-top:8px">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">02</span><h2>놀 수 있는 계곡 — 장단점 정리</h2></div>
+      <p class="sec-sub">대전 시청 기준 가까운 순. 국립공원(동학사)은 입수 규정이 엄격하니 단점을 꼭 확인하세요.</p>
+
+      <div class="grid">
+
+        <article class="card">
+          <div class="card-top"><div><h3>수통골 계곡</h3><div class="region">대전 유성구 · 도심 20분</div></div><div class="tags"><span class="tag free">무료</span></div></div>
+          <div class="statline">
+            <div class="stat"><span class="k">입장·주차</span><span class="v">무료 · 주차장 有</span></div>
+            <div class="stat"><span class="k">수심</span><span class="v">얕음</span></div>
+            <div class="stat"><span class="k">교통</span><span class="v">버스 102·103·104</span></div>
+          </div>
+          <div class="pc">
+            <ul class="pros"><li>도심 20분, <b>접근성 최고</b>. 무료 + 주차장</li><li>수심 얕아 아이 동반 안전, 자연폭포 2곳·미로공원</li><li>주변 카페·맛집 밀집</li></ul>
+            <ul class="cons"><li>주말·휴가철 <b>오전에 만차</b>, 인파 많음</li><li>비가 적으면 물이 가무는 편(강수량 영향)</li></ul>
+          </div>
+          <div class="refs"><span class="lbl">후기</span><a href="https://www.welfarehello.com/community/hometownNews/6acc6c50-c9c3-47e9-a12d-b5d30868041b" target="_blank" rel="noopener">웰로</a><a href="https://m.joongdo.co.kr/view.php?key=20120807000001031" target="_blank" rel="noopener">중도일보</a></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><div><h3>상소동 산림욕장</h3><div class="region">대전 동구 · 도심</div></div><div class="tags"><span class="tag free">무료</span></div></div>
+          <div class="statline">
+            <div class="stat"><span class="k">입장·주차</span><span class="v">둘 다 무료</span></div>
+            <div class="stat"><span class="k">수심</span><span class="v">60~80cm</span></div>
+            <div class="stat"><span class="k">운영</span><span class="v">6~8월</span></div>
+          </div>
+          <div class="pc">
+            <ul class="pros"><li>입장·주차 <b>완전 무료</b>(제1~3주차장)</li><li>물놀이장 4개소·수심 얕음·<b>안전요원·응급차</b> 배치</li><li>400여 개 돌탑 숲길, 캠핑장 병설</li></ul>
+            <ul class="cons"><li>물놀이는 <b>6~8월만</b> 운영</li><li>성수기 주말 주차장 혼잡</li></ul>
+          </div>
+          <div class="refs"><span class="lbl">후기</span><a href="https://www.tripadvisor.com/Attraction_Review-g297887-d12281998-Reviews-Sangso_dong_Forest_Therapy-Daejeon.html" target="_blank" rel="noopener">트립어드바이저</a><a href="https://www.telltrip.com/domestic-travel/daejeon-sangso-dong-forest-park/" target="_blank" rel="noopener">여행을말하다</a></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><div><h3>동학사 계곡</h3><div class="region">공주 · 계룡산국립공원 · 25~40분</div></div><div class="tags"><span class="tag paid">주차 유료</span><span class="tag zone">규정有</span></div></div>
+          <div class="statline">
+            <div class="stat"><span class="k">개방</span><span class="v">7/1~8/31</span></div>
+            <div class="stat"><span class="k">주차</span><span class="v">5,000원<small>/종일</small></span></div>
+            <div class="stat"><span class="k">허용</span><span class="v">손·발만</span></div>
+          </div>
+          <div class="pc">
+            <ul class="pros"><li>물 맑고 풍경 최고, 대전서 가까움, 은선폭포</li><li>3.5km 청정 계곡, 힐링·산책 코스 우수</li></ul>
+            <ul class="cons"><li><b>7~8월 두 달만</b> 개방</li><li><b>수영·튜브·취사·야영·음식 반입 금지</b> — '노는' 계곡 아님</li><li>주차 유료</li></ul>
+          </div>
+          <div class="refs"><span class="lbl">후기</span><a href="https://www.telltrip.com/domestic-travel/gyeryongsan-donghaksa-valley-summer/" target="_blank" rel="noopener">여행을말하다</a></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><div><h3>대둔산 수락계곡</h3><div class="region">논산 벌곡면 · 40~50분</div></div><div class="tags"><span class="tag free">계곡 무료</span></div></div>
+          <div class="statline">
+            <div class="stat"><span class="k">물</span><span class="v">차가운 암반</span></div>
+            <div class="stat"><span class="k">명물</span><span class="v">수락폭포 15m</span></div>
+            <div class="stat"><span class="k">숙박</span><span class="v">펜션·캠핑 밀집</span></div>
+          </div>
+          <div class="pc">
+            <ul class="pros"><li>한여름에도 <b>차가운 암반계곡</b>, 경치 웅장</li><li>15m 수락폭포, 트레킹·케이블카 연계</li><li>펜션·캠핑장 많아 <b>1박 물놀이에 최적</b></li></ul>
+            <ul class="cons"><li>대전서 40~50분(근교)</li><li>성수기 주말 혼잡</li></ul>
+          </div>
+          <div class="refs"><span class="lbl">후기</span><a href="https://festival.allissue100.com/entry/%EB%8C%80%EC%A0%84%EA%B7%BC%EA%B5%90-%EB%AC%BC%EB%86%80%EC%9D%B4-%EB%8C%80%EB%91%94%EC%82%B0-%EC%88%98%EB%9D%BD%EA%B3%84%EA%B3%A1-%EC%B6%94%EC%B2%9C" target="_blank" rel="noopener">방문기</a><a href="https://www.welfarehello.com/community/hometownNews/8795a610-18e8-45fb-88d1-7a2b8232d2ce" target="_blank" rel="noopener">웰로</a></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><div><h3>장태산 자연휴양림</h3><div class="region">대전 서구 · 도심</div></div><div class="tags"><span class="tag paid">입장료</span></div></div>
+          <div class="statline">
+            <div class="stat"><span class="k">물놀이</span><span class="v">휴양림 내 계곡</span></div>
+            <div class="stat"><span class="k">명물</span><span class="v">메타세쿼이아·스카이워크</span></div>
+          </div>
+          <div class="pc">
+            <ul class="pros"><li><b>계곡+숲속 숙박</b>을 한 번에(아래 숲속의집)</li><li>메타세쿼이아 숲·스카이워크, 산책 좋음</li></ul>
+            <ul class="cons"><li>계곡 규모는 크지 않음</li><li>입장료 있음</li></ul>
+          </div>
+          <div class="refs"><span class="lbl">후기</span><a href="https://www.allstay.com/alltrip/post/jangtaesan-natural-recreation-forest-and-accommodationsnearby" target="_blank" rel="noopener">올스테이</a></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><div><h3>장령산 계곡</h3><div class="region">옥천 군서면 · 20~30분</div></div><div class="tags"><span class="tag free">무료</span></div></div>
+          <div class="statline">
+            <div class="stat"><span class="k">분위기</span><span class="v">한적·힐링</span></div>
+            <div class="stat"><span class="k">연계</span><span class="v">장령산휴양림</span></div>
+          </div>
+          <div class="pc">
+            <ul class="pros"><li>대전 20~30분인데 <b>붐비지 않음</b></li><li>계곡산장·풀빌라 등 숙박 인접</li></ul>
+            <ul class="cons"><li>편의·먹거리 시설은 적은 편</li></ul>
+          </div>
+          <div class="refs"><span class="lbl">후기</span><a href="https://www.jangm.co.kr/" target="_blank" rel="noopener">장령산계곡산장</a></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><div><h3>청강수폭포 계곡</h3><div class="region">금산 진산면 · 30~40분</div></div><div class="tags"><span class="tag paid">가든 이용</span></div></div>
+          <div class="statline">
+            <div class="stat"><span class="k">형태</span><span class="v">폭포가든+계곡</span></div>
+            <div class="stat"><span class="k">먹거리</span><span class="v">백숙·삼겹살</span></div>
+          </div>
+          <div class="pc">
+            <ul class="pros"><li>식사하며 <b>계곡 물놀이</b> 동시에 — 가족·모임 편함</li><li>계곡 바로 옆 펜션(청강수계곡가든)</li></ul>
+            <ul class="cons"><li>가든(식당) 이용 전제라 순수 무료 계곡은 아님</li></ul>
+          </div>
+          <div class="refs"><span class="lbl">후기</span><a href="https://accommodation.myrealtrip.com/union/products/3195288" target="_blank" rel="noopener">마이리얼트립</a></div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 숙소 6인 ============ -->
+  <section style="padding-top:8px">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>6인이 묵을 숙소 — 가격·평점·장단점</h2></div>
+      <p class="sec-sub">모두 <b>6인 이상 수용 가능</b> 기준으로 다시 선별했습니다. 가격은 1박·조사 시점 기준(성수기·주말·인원추가 시 상승), 평점은 여기어때 10점 만점·괄호는 후기 수입니다. <b>스테이비롯 풀빌라는 최대 4인이라 제외</b>했습니다.</p>
+
+      <div class="grid">
+
+        <article class="card">
+          <div class="card-top"><div><h3>대둔산 잉스힐펜션</h3><div class="region">논산 수락계곡 · 펜션</div></div><div class="tags"><span class="tag zone">6인+ 단체</span></div></div>
+          <div class="statline">
+            <div class="stat"><span class="k">1박</span><span class="v">150,000원</span></div>
+            <div class="stat"><span class="k">평점</span><span class="v rate hi">9.8<small>/10</small></span></div>
+            <div class="stat"><span class="k">후기</span><span class="v">17건</span></div>
+          </div>
+          <div class="pc">
+            <ul class="pros"><li><b>8인 이상 단체</b>도 적합, 평점·후기 최상위</li><li>사장님이 <b>계곡 가는 길 상세 안내</b></li><li>체크인 14시·체크아웃 12시 → <b>물놀이 길게</b>, 대둔산 절경</li></ul>
+            <ul class="cons"><li>성수기 예약 경쟁, 조기 마감</li></ul>
+          </div>
+          <div class="refs"><span class="lbl">예약·후기</span><a href="https://place-site.yanolja.com/places/1000106303" target="_blank" rel="noopener">NOL</a><a href="https://www.yeogi.com/kr/pension/%EC%B6%A9%EB%82%A8/%EB%85%BC%EC%82%B0/%EB%85%BC%EC%82%B0%EC%8B%9C%EC%88%98%EB%9D%BD%EA%B3%84%EA%B3%A1" target="_blank" rel="noopener">여기어때</a></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><div><h3>논산 패밀리아펜션</h3><div class="region">수락계곡 차량 9분 · 가족형</div></div><div class="tags"><span class="tag zone">가족룸</span></div></div>
+          <div class="statline">
+            <div class="stat"><span class="k">1박</span><span class="v">158,000원<small>쿠폰가</small></span></div>
+            <div class="stat"><span class="k">평점</span><span class="v rate hi">9.8<small>/10</small></span></div>
+            <div class="stat"><span class="k">후기</span><span class="v">9건</span></div>
+          </div>
+          <div class="pc">
+            <ul class="pros"><li><b>넓은 가족룸</b> + 바비큐장, 평점 9.8</li><li>6인 가족 단위에 무난</li></ul>
+            <ul class="cons"><li>계곡까지 <b>차량 9분</b>(도보권 아님)</li></ul>
+          </div>
+          <div class="refs"><span class="lbl">예약·후기</span><a href="https://www.yeogi.com/accommodation/pension/kr/attraction/%EB%85%BC%EC%82%B0%EC%8B%9C%EB%8C%80%EB%91%94%EC%82%B0%EB%8F%84%EB%A6%BD%EA%B3%B5%EC%9B%90+%EB%85%BC%EC%82%B0" target="_blank" rel="noopener">여기어때</a></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><div><h3>대둔산빌리지 워터파크</h3><div class="region">논산 벌곡면 · 펜션+워터파크</div></div><div class="tags"><span class="tag zone">수영장</span></div></div>
+          <div class="statline">
+            <div class="stat"><span class="k">1박</span><span class="v">80,000원~<small>+인원추가</small></span></div>
+            <div class="stat"><span class="k">워터파크</span><span class="v">6~8월</span></div>
+            <div class="stat"><span class="k">보증금</span><span class="v">50,000원</span></div>
+          </div>
+          <div class="pc">
+            <ul class="pros"><li><b>초대형 수영장·워터슬라이드</b> — 계곡 없이도 물놀이 확실</li><li>놀이터·풋살·족구·당구·탁구 등 <b>단체 놀거리 풍부</b></li><li>입실 당일 수영장 무료</li></ul>
+            <ul class="cons"><li>후기 중 <b>청결·가성비 지적</b>도 있음</li><li>성수기 인원추가 3만원/인 + 보증금, 수영장 별도 이용료(당일 외)</li></ul>
+          </div>
+          <div class="refs"><span class="lbl">예약·후기</span><a href="https://nol.yanolja.com/stay/domestic/10050389" target="_blank" rel="noopener">NOL</a><a href="https://www.yeogi.com/domestic-accommodations/53319" target="_blank" rel="noopener">여기어때</a><a href="https://www.myrealtrip.com/union/products/3185642" target="_blank" rel="noopener">마이리얼트립</a></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><div><h3>대둔산 쉼마루펜션</h3><div class="region">논산 수락저수지 도보 9분 · 펜션</div></div><div class="tags"><span class="tag zone">놀거리</span></div></div>
+          <div class="statline">
+            <div class="stat"><span class="k">1박</span><span class="v">180,000원</span></div>
+            <div class="stat"><span class="k">평점</span><span class="v rate hi">9.7<small>/10</small></span></div>
+            <div class="stat"><span class="k">후기</span><span class="v">2건</span></div>
+          </div>
+          <div class="pc">
+            <ul class="pros"><li>탁구장·족구장·야외테이블 등 <b>단체 놀거리</b></li><li>수락저수지 산책로, 만족도 높음</li></ul>
+            <ul class="cons"><li>후기 수 적음(2건)</li><li>계곡보단 저수지 인접</li></ul>
+          </div>
+          <div class="refs"><span class="lbl">예약·후기</span><a href="https://www.yeogi.com/accommodation/pension/kr/attraction/%EB%85%BC%EC%82%B0%EC%8B%9C%EB%8C%80%EB%91%94%EC%82%B0%EB%8F%84%EB%A6%BD%EA%B3%B5%EC%9B%90+%EB%85%BC%EC%82%B0" target="_blank" rel="noopener">여기어때</a></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><div><h3>대둔산 사계절펜션</h3><div class="region">금산·논산 경계 · 펜션</div></div><div class="tags"><span class="tag zone">수영장</span></div></div>
+          <div class="statline">
+            <div class="stat"><span class="k">1박</span><span class="v">문의</span></div>
+            <div class="stat"><span class="k">평점</span><span class="v rate mid">8.4<small>/10</small></span></div>
+            <div class="stat"><span class="k">후기</span><span class="v">4건</span></div>
+          </div>
+          <div class="pc">
+            <ul class="pros"><li><b>넓은 수영장·미니풀·야외노래방</b>, 계곡 활동</li><li>사계절 이용</li></ul>
+            <ul class="cons"><li>평점이 상대적으로 낮음(8.4), 후기 적음</li></ul>
+          </div>
+          <div class="refs"><span class="lbl">예약·후기</span><a href="https://kr.hotels.com/ho1482648640/" target="_blank" rel="noopener">호텔스닷컴</a></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><div><h3>대둔산아리아펜션</h3><div class="region">논산 벌곡면 수락리 · 통나무</div></div><div class="tags"><span class="tag zone">대형·단체</span></div></div>
+          <div class="statline">
+            <div class="stat"><span class="k">1박</span><span class="v">문의</span></div>
+            <div class="stat"><span class="k">수용</span><span class="v">최대 150명</span></div>
+            <div class="stat"><span class="k">위치</span><span class="v">수락계곡 인접</span></div>
+          </div>
+          <div class="pc">
+            <ul class="pros"><li>유럽풍 통나무집, <b>수락계곡 아주 가까움</b></li><li>사장님 친절, 3대 가족·대형 단체 적합</li></ul>
+            <ul class="cons"><li>대형이라 성수기엔 <b>프라이빗함이 덜할 수</b> 있음</li></ul>
+          </div>
+          <div class="refs"><span class="lbl">예약·후기</span><a href="https://nol.yanolja.com/stay/domestic/1000103856" target="_blank" rel="noopener">NOL</a></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><div><h3>장태산휴양림 숲속의집</h3><div class="region">대전 서구 · 국가 운영 · 6인실</div></div><div class="tags"><span class="tag free">가성비</span></div></div>
+          <div class="statline">
+            <div class="stat"><span class="k">1박</span><span class="v">75,000원<small>성수기 134,000</small></span></div>
+            <div class="stat"><span class="k">유형</span><span class="v">숲속 독채</span></div>
+            <div class="stat"><span class="k">예약</span><span class="v">숲나들e</span></div>
+          </div>
+          <div class="pc">
+            <ul class="pros"><li>국가 운영 <b>가성비·청결·관리 우수</b></li><li>숲속 단독주택, 차량 진입 가능, 메타세쿼이아 숲</li></ul>
+            <ul class="cons"><li><b>예약 극악</b> — 매월 1일 09시 오픈 즉시 마감</li><li>실내 고기 굽기 금지, 화려한 부대시설 없음</li></ul>
+          </div>
+          <div class="refs"><span class="lbl">예약·후기</span><a href="https://www.foresttrip.go.kr/pot/rm/ri/selectUsNoteListView.do?hmpgId=ID02030106&menuId=005003&bbrssMsterId=BBRSSMSTER_00000054" target="_blank" rel="noopener">숲나들e 이용후기</a><a href="https://billion.dalmi-info.com/2024/10/jangtaesan-nature-reserve-accommodation-and-pricing.html" target="_blank" rel="noopener">요금 정리</a></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><div><h3>숲속의작은집</h3><div class="region">대전 서구 장태산 근처 · 독채</div></div><div class="tags"><span class="tag zone">기준4·최대6</span></div></div>
+          <div class="statline">
+            <div class="stat"><span class="k">1박</span><span class="v">280,000원<small>~350,000</small></span></div>
+            <div class="stat"><span class="k">구성</span><span class="v">침실2·욕실2</span></div>
+            <div class="stat"><span class="k">뷰</span><span class="v">계곡·마운틴</span></div>
+          </div>
+          <div class="pc">
+            <ul class="pros"><li>신축 깔끔·<b>프라이빗 독채</b>, 계곡뷰·마운틴뷰</li><li>바비큐장, 분리된 주방·테라스</li></ul>
+            <ul class="cons"><li>가격 높은 편, <b>최대 6인</b>이라 여유는 빠듯</li></ul>
+          </div>
+          <div class="refs"><span class="lbl">후기</span><a href="https://www.allstay.com/alltrip/post/jangtaesan-natural-recreation-forest-and-accommodationsnearby" target="_blank" rel="noopener">올스테이</a></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><div><h3>계룡산동학사펜션</h3><div class="region">공주 반포면 · 기준6·최대12</div></div><div class="tags"><span class="tag zone">6~12인</span></div></div>
+          <div class="statline">
+            <div class="stat"><span class="k">1박</span><span class="v">270,000원<small>~280,000</small></span></div>
+            <div class="stat"><span class="k">수용</span><span class="v">기준 6인</span></div>
+            <div class="stat"><span class="k">위치</span><span class="v">동학사 인근</span></div>
+          </div>
+          <div class="pc">
+            <ul class="pros"><li><b>기준 6인·최대 12인</b> — 인원 여유, 동학사 계곡 근처</li><li>앞 계곡서 물놀이 좋았다는 후기(반포면 일대)</li></ul>
+            <ul class="cons"><li>동학사 계곡은 <b>발 담그기만</b> 허용(규정)</li><li>평일가 기준이라 주말 상승</li></ul>
+          </div>
+          <div class="refs"><span class="lbl">예약·후기</span><a href="https://nol.yanolja.com/stay/domestic/1000105766" target="_blank" rel="noopener">NOL</a><a href="https://www.yeogi.com/accommodation/pension/kr/attraction/%EA%B3%B5%EC%A3%BC%EC%8B%9C%EB%B0%98%ED%8F%AC%EB%A9%B4" target="_blank" rel="noopener">여기어때</a></div>
+        </article>
+
+      </div>
+
+      <div class="callout">
+        <b>알뜰 대안 · 캠핑</b> — 6인이 예산을 아끼려면 <b>대둔산 수락오토캠핑장</b>(비수기 주중 2.5만·성수기 3만, 37사이트)이 최고 가성비. 계곡 바로 옆·샤워장·개수대·전기 완비, "사이트 간격 넓고 청결" 호평.
+        <a href="https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7930" target="_blank" rel="noopener" style="margin-left:6px">고캠핑 정보↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 팁 & 코스 ============ -->
+  <section style="padding-top:8px">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">04</span><h2>실전 팁 &amp; 추천 코스 (6인)</h2></div>
+      <p class="sec-sub">예약 타이밍과 규정만 알아도 절반은 성공. 아래 1박 2일 동선을 함께 보며 정하세요.</p>
+      <div class="two">
+        <div class="tips">
+          <div class="tip"><b>예약 골든타임</b><span>성수기 인기 펜션·휴양림은 <b>한 달 전 1일</b> 오픈 즉시 마감. 장태산 숲속의집은 매월 1일 09시 숲나들e 알람 필수.</span></div>
+          <div class="tip"><b>6인 인원추가비 확인</b><span>펜션 다수가 기준 4인 → 6인이면 <b>1인당 1.5만~3만원</b> 추가·보증금 발생. 예약 전 총액으로 비교.</span></div>
+          <div class="tip"><b>동학사는 '노는' 계곡 아님</b><span>7~8월만, <b>발만</b> 허용(튜브·수영·취사 금지). 물놀이가 목적이면 상소동·수락계곡으로.</span></div>
+          <div class="tip"><b>무료로 즐기려면</b><span>당일치기는 <b>상소동·수통골</b>(입장·주차 무료). 숙박형 알뜰은 수락오토캠핑장(3만).</span></div>
+          <div class="tip"><b>비 오면 대안</b><span>계곡 수량은 강수 영향. 흐리면 <b>대둔산빌리지 워터파크·사계절펜션 수영장</b>으로 전환.</span></div>
+        </div>
+        <div class="course">
+          <h3>추천 1박 2일 — 물놀이 몰입형</h3>
+          <p class="cs-sub">6인 · 대전 출발 · 논산 대둔산권</p>
+          <ol class="timeline">
+            <li><div class="t">DAY 1 · 오후</div><div class="d"><b>대둔산 수락계곡</b> 도착 → 수락폭포(15m) + 차가운 암반 계곡 물놀이.</div></li>
+            <li><div class="t">DAY 1 · 저녁</div><div class="d"><b>잉스힐펜션</b>(15만·평점 9.8, 단체 적합) 체크인 → 바비큐. 알뜰파는 <b>수락오토캠핑장</b>(3만).</div></li>
+            <li><div class="t">DAY 2 · 오전</div><div class="d">계곡 아침 물놀이 → <b>대둔산 케이블카·구름다리</b> 트레킹.</div></li>
+            <li><div class="t">돌아오는 길</div><div class="d">복귀 전 <b>상소동 산림욕장</b>(무료 수영장) 한 번 더 or 유성 카페거리.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <h4>출처 · 참고</h4>
+    <div class="srcs">
+      <a href="https://www.welfarehello.com/community/hometownNews/6acc6c50-c9c3-47e9-a12d-b5d30868041b" target="_blank" rel="noopener">웰로 · 수통골</a>
+      <a href="https://www.telltrip.com/domestic-travel/daejeon-sangso-dong-forest-park/" target="_blank" rel="noopener">여행을말하다 · 상소동</a>
+      <a href="https://www.tripadvisor.com/Attraction_Review-g297887-d12281998-Reviews-Sangso_dong_Forest_Therapy-Daejeon.html" target="_blank" rel="noopener">트립어드바이저 · 상소동</a>
+      <a href="https://www.telltrip.com/domestic-travel/gyeryongsan-donghaksa-valley-summer/" target="_blank" rel="noopener">여행을말하다 · 동학사</a>
+      <a href="https://www.yeogi.com/accommodation/pension/kr/attraction/%EB%85%BC%EC%82%B0%EC%8B%9C%EB%8C%80%EB%91%94%EC%82%B0%EB%8F%84%EB%A6%BD%EA%B3%B5%EC%9B%90+%EB%85%BC%EC%82%B0" target="_blank" rel="noopener">여기어때 · 논산 펜션</a>
+      <a href="https://nol.yanolja.com/stay/domestic/10050389" target="_blank" rel="noopener">NOL · 대둔산빌리지</a>
+      <a href="https://nol.yanolja.com/stay/domestic/1000103856" target="_blank" rel="noopener">NOL · 아리아펜션</a>
+      <a href="https://nol.yanolja.com/stay/domestic/1000105766" target="_blank" rel="noopener">NOL · 계룡산동학사펜션</a>
+      <a href="https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7930" target="_blank" rel="noopener">고캠핑 · 수락오토캠핑장</a>
+      <a href="https://billion.dalmi-info.com/2024/10/jangtaesan-nature-reserve-accommodation-and-pricing.html" target="_blank" rel="noopener">장태산 숙박 요금</a>
+      <a href="https://www.allstay.com/alltrip/post/jangtaesan-natural-recreation-forest-and-accommodationsnearby" target="_blank" rel="noopener">올스테이 · 장태산 근처</a>
+    </div>
+    <p class="disc">가격·평점은 2025~2026년 여름 시즌 조사 시점 기준이며, 실시간 예약 상황·성수기 할증·인원추가비에 따라 달라집니다. 6인 수용 여부와 총액은 예약 전 각 플랫폼(여기어때·NOL/야놀자·마이리얼트립·숲나들e)에서 최종 확인하세요. 동학사 등 국립공원은 해당 연도 개방 공지를 반드시 확인하시기 바랍니다.</p>
+  </div>
+</footer>
+
+</body>
+</html>
