@@ -233,6 +233,37 @@
   .selinfo .book{margin-left:auto;text-decoration:none;font-weight:700;font-size:.75rem;color:var(--accent-deep);border:1px solid var(--border);border-radius:999px;padding:2px 9px;background:var(--surface)}
   .selinfo .book:hover{border-color:var(--accent)}
   .legend .lg-note{color:var(--ink-faint)}
+  /* structure: nav / toc / full-list / back-to-top */
+  html{scroll-behavior:smooth}
+  .topnav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  .topnav .wrap{display:flex;gap:2px;align-items:center;padding:0 20px;overflow-x:auto}
+  .topnav .nvb{margin-right:auto;font-weight:800;color:var(--ink);font-size:.86rem;padding:12px 8px 12px 0;white-space:nowrap}
+  .topnav a{flex:none;font-size:.85rem;font-weight:700;color:var(--ink-soft);text-decoration:none;padding:12px 11px;border-bottom:2px solid transparent;white-space:nowrap}
+  .topnav a:hover{color:var(--ink)}
+  .topnav a.on{color:var(--accent-deep);border-bottom-color:var(--accent)}
+  section[id],footer[id]{scroll-margin-top:54px}
+  .subh{font-size:1.08rem;font-weight:800;margin:28px 0 4px}
+  .subh b{color:var(--accent-deep)}
+  .vstays{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:14px}
+  .vcol{background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);overflow:hidden;align-self:start}
+  .vcol .vh{display:flex;align-items:center;gap:9px;padding:12px 14px;border-bottom:1px solid var(--border);font-weight:800;cursor:pointer;background:var(--surface-2)}
+  .vcol .vh .vdot{width:12px;height:12px;border-radius:3px;transform:rotate(45deg);border:2px solid #fff;box-shadow:0 0 0 1px var(--border-strong);flex:none}
+  .vcol .vh .vn{font-size:.98rem}
+  .vcol .vh .vcnt{margin-left:auto;font-size:.72rem;color:var(--ink-faint);font-weight:700}
+  .vcol .vh:hover .vn{color:var(--accent-deep)}
+  .srowx{display:block;padding:9px 14px;border-bottom:1px solid var(--border);text-decoration:none;color:inherit}
+  .srowx:last-child{border-bottom:0}
+  .srowx:hover{background:var(--surface-2)}
+  .srowx .r1{display:flex;align-items:baseline;gap:8px}
+  .srowx .xn{font-weight:800;font-size:.9rem;color:var(--ink)}
+  .srowx .xg{margin-left:auto;font-size:.72rem;color:var(--accent-deep);font-weight:700;white-space:nowrap}
+  .srowx .r2{margin-top:2px;font-size:.78rem;color:var(--ink-soft);display:flex;gap:8px;flex-wrap:wrap}
+  .srowx .xp{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+  .srowx .xr{color:var(--good);font-weight:800}
+  .srowx .xc{color:var(--ink-faint)}
+  .totop{position:fixed;right:18px;bottom:18px;z-index:60;width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--ink);box-shadow:var(--shadow);cursor:pointer;font-size:1.15rem;display:none;align-items:center;justify-content:center}
+  .totop.show{display:flex}
+  .totop:hover{border-color:var(--accent);color:var(--accent-deep)}
 </style>
 
 <header class="hero">
@@ -254,10 +285,22 @@
 </header>
 
 <main>
-  <!-- ============ 지도 ============ -->
-  <section class="mapsec">
+  <nav class="topnav" aria-label="섹션 바로가기">
     <div class="wrap">
-      <div class="sec-head"><span class="sec-num">지도</span><h2>어디가 가까울까 — 지도로 거리 보기</h2></div>
+      <span class="nvb">🏞️ 대전 워크샵</span>
+      <a href="#map-sec">지도</a>
+      <a href="#scenario">추천</a>
+      <a href="#valleys">계곡</a>
+      <a href="#stays">숙소</a>
+      <a href="#course">코스</a>
+      <a href="#sources">자료</a>
+    </div>
+  </nav>
+
+  <!-- ============ 지도 ============ -->
+  <section class="mapsec" id="map-sec">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">01</span><h2>어디가 가까울까 — 지도로 거리 보기</h2></div>
       <p class="sec-sub"><b>대전역</b>(교통 기준)과 함께 계곡·숙소를 지도에 표시했습니다. 계곡 이름은 항상 보이고, 목록에서 <b>계곡</b>을 고르면 지도는 그대로 고정된 채 <b>주변 6인 숙소</b>가 이름·거리와 함께 뜨고 오른쪽에 가격·평점·예약링크가 정렬됩니다. 확대/축소는 <b>+/−</b> 버튼으로만.</p>
       <div class="maplayout">
         <div id="map"></div>
@@ -276,9 +319,9 @@
   </section>
 
   <!-- ============ 시나리오 ============ -->
-  <section>
+  <section id="scenario">
     <div class="wrap">
-      <div class="sec-head"><span class="sec-num">01</span><h2>우리 팀은 어디로? — 시나리오별 추천</h2></div>
+      <div class="sec-head"><span class="sec-num">02</span><h2>우리 팀은 어디로? — 시나리오별 추천</h2></div>
       <p class="sec-sub">6명이 무엇을 가장 원하는지에 따라 조합을 골라보세요. 아래 계곡·숙소 상세와 연결됩니다.</p>
       <div class="scenarios">
         <div class="scn">
@@ -306,9 +349,9 @@
   </section>
 
   <!-- ============ 계곡 ============ -->
-  <section style="padding-top:8px">
+  <section id="valleys" style="padding-top:8px">
     <div class="wrap">
-      <div class="sec-head"><span class="sec-num">02</span><h2>놀 수 있는 계곡 — 장단점 정리</h2></div>
+      <div class="sec-head"><span class="sec-num">03</span><h2>놀 수 있는 계곡 — 장단점 정리</h2></div>
       <p class="sec-sub">대전 시청 기준 가까운 순. 국립공원(동학사)은 입수 규정이 엄격하니 단점을 꼭 확인하세요.</p>
 
       <div class="grid">
@@ -413,9 +456,9 @@
   </section>
 
   <!-- ============ 숙소 6인 ============ -->
-  <section style="padding-top:8px">
+  <section id="stays" style="padding-top:8px">
     <div class="wrap">
-      <div class="sec-head"><span class="sec-num">03</span><h2>6인이 묵을 숙소 — 가격·평점·장단점</h2></div>
+      <div class="sec-head"><span class="sec-num">04</span><h2>6인이 묵을 숙소 — 대표 상세 + 계곡별 전체</h2></div>
       <p class="sec-sub">모두 <b>6인 이상 수용 가능</b> 기준으로 다시 선별했습니다. 가격은 1박·조사 시점 기준(성수기·주말·인원추가 시 상승), 평점은 여기어때 10점 만점·괄호는 후기 수입니다. <b>스테이비롯 풀빌라는 최대 4인이라 제외</b>했습니다.</p>
 
       <div class="grid">
@@ -552,13 +595,17 @@
         <b>알뜰 대안 · 캠핑</b> — 6인이 예산을 아끼려면 <b>대둔산 수락오토캠핑장</b>(비수기 주중 2.5만·성수기 3만, 37사이트)이 최고 가성비. 계곡 바로 옆·샤워장·개수대·전기 완비, "사이트 간격 넓고 청결" 호평.
         <a href="https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7930" target="_blank" rel="noopener" style="margin-left:6px">고캠핑 정보↗</a>
       </div>
+
+      <h3 class="subh">계곡별 전체 숙소 <b>26곳</b> · 가격·평점 한눈에</h3>
+      <p class="sec-sub" style="margin-top:2px">위 지도와 같은 데이터입니다. <b>계곡 이름</b>을 누르면 지도에서 그 계곡이 선택되고, <b>숙소</b>를 누르면 예약 페이지로 이동합니다. 거리는 계곡 기준 직선거리.</p>
+      <div class="vstays" id="allstays"></div>
     </div>
   </section>
 
   <!-- ============ 팁 & 코스 ============ -->
-  <section style="padding-top:8px">
+  <section id="course" style="padding-top:8px">
     <div class="wrap">
-      <div class="sec-head"><span class="sec-num">04</span><h2>실전 팁 &amp; 추천 코스 (6인)</h2></div>
+      <div class="sec-head"><span class="sec-num">05</span><h2>실전 팁 &amp; 추천 코스 (6인)</h2></div>
       <p class="sec-sub">예약 타이밍과 규정만 알아도 절반은 성공. 아래 1박 2일 동선을 함께 보며 정하세요.</p>
       <div class="two">
         <div class="tips">
@@ -583,9 +630,9 @@
   </section>
 </main>
 
-<footer>
+<footer id="sources">
   <div class="wrap">
-    <h4>출처 · 참고</h4>
+    <h4>출처 · 참고 <span style="text-transform:none;letter-spacing:0;color:var(--ink-soft);font-weight:600">· 마지막 업데이트 2026-07-10</span></h4>
     <div class="srcs">
       <a href="https://www.welfarehello.com/community/hometownNews/6acc6c50-c9c3-47e9-a12d-b5d30868041b" target="_blank" rel="noopener">웰로 · 수통골</a>
       <a href="https://www.telltrip.com/domestic-travel/daejeon-sangso-dong-forest-park/" target="_blank" rel="noopener">여행을말하다 · 상소동</a>
@@ -737,6 +784,23 @@
   }
   buildList();
 
+  function renderAll(){
+    var host=document.getElementById('allstays'); if(!host) return;
+    var h='';
+    VALLEYS.forEach(function(v,vi){
+      h+='<div class="vcol"><div class="vh" data-vi="'+vi+'" title="지도에서 이 계곡 선택"><span class="vdot" style="background:'+v.c+'"></span><span class="vn">'+v.n+'</span><span class="vcnt">숙소 '+byV[v.id].length+'곳</span></div>';
+      var items=byV[v.id].map(function(si){return {s:STAYS[si],d:km(v,STAYS[si])};}).sort(function(a,b){return a.d-b.d;});
+      items.forEach(function(o){
+        var r=o.s.r?'<span class="xr">★'+o.s.r+'</span>':'';
+        h+='<a class="srowx" href="'+o.s.u+'" target="_blank" rel="noopener"><div class="r1"><span class="xn">'+o.s.n+'</span><span class="xg">예약 ↗</span></div><div class="r2"><span class="xp">'+o.s.p+'</span>'+r+'<span class="xc">'+o.s.c+' · '+o.d.toFixed(1)+'km</span></div></a>';
+      });
+      h+='</div>';
+    });
+    host.innerHTML=h;
+    host.querySelectorAll('.vh').forEach(function(vh){ vh.addEventListener('click',function(){ var vi=+vh.dataset.vi; if(selectedV!==vi){selectValley(vi);} var m=document.getElementById('map-sec'); if(m) m.scrollIntoView({behavior:'smooth',block:'start'}); }); });
+  }
+  renderAll();
+
   function deselect(fit){
     selectedV=-1; emph.clearLayers();
     vMk.forEach(function(mk,k){ mk.setIcon(vIcon(VALLEYS[k],false)); mk.setOpacity(1); });
@@ -752,6 +816,26 @@
     tiles.setUrl(tileURL());
     if(selectedV>=0){selectValley(selectedV);}
   });
+})();
+</script>
+
+<button class="totop" id="totop" type="button" aria-label="맨 위로">↑</button>
+<script>
+(function(){
+  var nav=document.querySelector('.topnav');
+  var totop=document.getElementById('totop');
+  var links=nav?[].slice.call(nav.querySelectorAll('a[href^="#"]')):[];
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function onScroll(){
+    var y=window.scrollY+70, idx=-1;
+    secs.forEach(function(s,i){ if(s && s.offsetTop<=y) idx=i; });
+    links.forEach(function(a,i){ a.classList.toggle('on',i===idx); });
+    if(totop) totop.classList.toggle('show', window.scrollY>500);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll,{passive:true});
+  onScroll();
+  if(totop) totop.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
 })();
 </script>
 </body>
