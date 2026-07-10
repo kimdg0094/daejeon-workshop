@@ -694,6 +694,7 @@
   }
 
   function selectValley(vi){
+    if(vi===selectedV){ deselect(false); return; }   // 같은 계곡 다시 클릭 → 선택 해제(뷰 유지)
     selectedV=vi; var v=VALLEYS[vi];
     emph.clearLayers();
     vMk.forEach(function(mk,k){ mk.setIcon(vIcon(VALLEYS[k],k===vi)); mk.setOpacity(k===vi?1:0.3); });
@@ -736,14 +737,15 @@
   }
   buildList();
 
-  document.getElementById('mreset').addEventListener('click',function(){
+  function deselect(fit){
     selectedV=-1; emph.clearLayers();
     vMk.forEach(function(mk,k){ mk.setIcon(vIcon(VALLEYS[k],false)); mk.setOpacity(1); });
     sMk.forEach(function(mk){ mk.setOpacity(.9); });
     box.querySelectorAll('.vbtn').forEach(function(b){b.classList.remove('active');});
     var el=document.getElementById('selinfo'); el.classList.remove('show'); el.innerHTML='';
-    map.fitBounds(allPts,{padding:[40,40]});
-  });
+    if(fit){ map.fitBounds(allPts,{padding:[40,40]}); }
+  }
+  document.getElementById('mreset').addEventListener('click',function(){ deselect(true); });
 
   var mq=matchMedia('(prefers-color-scheme: dark)');
   (mq.addEventListener?mq.addEventListener.bind(mq,'change'):mq.addListener.bind(mq))(function(){
